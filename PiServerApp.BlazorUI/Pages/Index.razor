@@ -16,6 +16,7 @@
     </label>
 </div>
 <button @onclick="Send" disabled="@(!IsConnected)">Send</button>
+<button @onclick="SendInt" disabled="@(!IsConnected)">SendInt</button>
 
 <hr>
 
@@ -45,11 +46,21 @@
             StateHasChanged();
         });
 
+        hubConnection.On<string, int>("IntReceive", (user, message) =>
+        {
+            var encodedMsg = $"{user}: {message}";
+            messages.Add(encodedMsg);
+            StateHasChanged();
+        });
+
         await hubConnection.StartAsync();
     }
 
     async Task Send() =>
         await hubConnection.SendAsync("SendMessage", userInput, messageInput);
+
+    async Task SendInt() =>
+        await hubConnection.SendAsync("SendInt", userInput, messageInput);
 
     public bool IsConnected =>
         hubConnection.State == HubConnectionState.Connected;
