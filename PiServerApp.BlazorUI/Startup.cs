@@ -62,7 +62,7 @@ namespace PiServerApp.BlazorUI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
-                endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapHub<SensorHub>("/sensorhub");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace PiServerApp.BlazorUI.Hubs
 {
-    public class ChatHub : Hub
+    public class SensorHub : Hub
     {
         public async Task SendMessage(string user, string message)
         {
@@ -16,7 +16,8 @@ namespace PiServerApp.BlazorUI.Hubs
         public async Task SendInt(string user, int message)
         {
             //await Clients.All.SendAsync("ReceiveMessage", user, message);
-            await Clients.Others.SendAsync("IntReceive", user, message);
+            await Clients.Others.SendAsync("ReceiveInt" +
+                                           "", user, message);
         }
     }
 }

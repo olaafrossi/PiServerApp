@@ -17,7 +17,7 @@ namespace PiServerApp.BlazorUI.Pages
         protected override async Task OnInitializedAsync()
         {
             hubConnection = new HubConnectionBuilder()
-                .WithUrl(NavigationManager.ToAbsoluteUri("/chathub"))
+                .WithUrl(NavigationManager.ToAbsoluteUri("/sensorhub"))
                 .Build();
 
             hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
@@ -27,7 +27,7 @@ namespace PiServerApp.BlazorUI.Pages
                 StateHasChanged();
             });
 
-            hubConnection.On<string, int>("IntReceive", (user, message) =>
+            hubConnection.On<string, int>("ReceiveInt", (user, message) =>
             {
                 var encodedMsg = $"{user}: {message}";
                 messages.Add(encodedMsg);
