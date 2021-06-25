@@ -16,8 +16,7 @@ namespace PiServerApp.BlazorUI.Hubs
         public async Task SendInt(string user, int message)
         {
             //await Clients.All.SendAsync("ReceiveMessage", user, message);
-            await Clients.Others.SendAsync("ReceiveInt" +
-                                           "", user, message);
+            await Clients.Others.SendAsync("ReceiveInt" + "", user, message);
         }
     }
 }
